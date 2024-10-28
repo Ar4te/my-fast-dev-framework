@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 *.idea/
+/desktop/.idea/.idea.desktop/.idea/.gitignore
+/desktop/.idea/.idea.desktop/.idea/encodings.xml
+/desktop/.idea/.idea.desktop/.idea/indexLayout.xml
