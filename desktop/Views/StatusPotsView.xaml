@@ -17,7 +17,7 @@
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsBlinking}" Value="True">
+                            <DataTrigger Binding="{Binding IsGrayBlinking}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource BlinkingAnimation}" />
                                 </DataTrigger.EnterActions>
@@ -34,7 +34,7 @@
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsBlinking}" Value="True">
+                            <DataTrigger Binding="{Binding IsGreenBlinking}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource BlinkingAnimation}" />
                                 </DataTrigger.EnterActions>
@@ -51,7 +51,7 @@
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsBlinking}" Value="True">
+                            <DataTrigger Binding="{Binding IsRedBlinking}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource BlinkingAnimation}" />
                                 </DataTrigger.EnterActions>

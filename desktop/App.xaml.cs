@@ -48,6 +48,7 @@ public partial class App : Application
         services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
         services.AddSingleton<IContactService, ContactService>();
         services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<IAppVersionService, AppVersionService>();
 
         services.AddSingleton<MainViewModel>();
         services.AddTransient<ContactListViewModel>();

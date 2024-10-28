@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "desktop", "desktop.csproj", "{8DC018E6-B00E-4E97-A723-11955C606295}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "desktop", "desktop.csproj", "{8DC018E6-B00E-4E97-A723-11955C606295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "updater", "..\updater\updater.csproj", "{8A546F69-2D77-432C-BEE0-9C52F76EEA9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{8DC018E6-B00E-4E97-A723-11955C606295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DC018E6-B00E-4E97-A723-11955C606295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DC018E6-B00E-4E97-A723-11955C606295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A546F69-2D77-432C-BEE0-9C52F76EEA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A546F69-2D77-432C-BEE0-9C52F76EEA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A546F69-2D77-432C-BEE0-9C52F76EEA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A546F69-2D77-432C-BEE0-9C52F76EEA9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF6D8CF7-3CB7-4DA5-AD90-F8B514A5BF3C}
 	EndGlobalSection
 EndGlobal

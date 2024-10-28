@@ -12,7 +12,7 @@ public class AddContactViewModel : BaseViewModel
     private readonly INavigationService _navigationService;
 
     public Contact NewContact { get; set; }
-    public ICommand SaveContactCommand { get; }
+    public RelayCommand SaveContactCommand { get; }
 
     public AddContactViewModel(IContactService contactService, INavigationService navigationService)
     {
@@ -27,12 +27,13 @@ public class AddContactViewModel : BaseViewModel
         var row = await _contactService.CreateAsync(NewContact);
         if (row == 1)
         {
-            Growl.Success("456456", "SuccessMsg");
+            Growl.Success("操作成功", "GlobalMsg");
+            // StatusPotsViewModel.Success();
             _navigationService.NavigateTo<ContactListViewModel>();
         }
         else
         {
-            Growl.Error("123123", "SuccessMsg");
+            Growl.Error("操作失败", "GlobalMsg");
         }
     }
 }

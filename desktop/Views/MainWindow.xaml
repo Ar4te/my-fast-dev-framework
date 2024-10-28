@@ -36,7 +36,7 @@
                       x:Name="GrowlBox"
                       Background="Transparent"
                       Grid.RowSpan="3">
-            <StackPanel hc:Growl.Token="SuccessMsg" VerticalAlignment="Top" HorizontalAlignment="Right" />
+            <StackPanel hc:Growl.Token="GlobalMsg" VerticalAlignment="Top" HorizontalAlignment="Right" />
         </ScrollViewer>
 
         <!-- 底部分割线 -->
