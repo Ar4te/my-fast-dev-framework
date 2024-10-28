@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="desktop.Views.ContactListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:desktop.ViewModels"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             MaxHeight="360"
+             >
+    <DataGrid HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Contacts}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+        <DataGrid.RowHeaderTemplate>
+            <DataTemplate>
+                <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+            </DataTemplate>
+        </DataGrid.RowHeaderTemplate>
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
+            <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
