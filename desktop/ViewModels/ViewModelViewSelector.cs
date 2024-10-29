@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using desktop.Views;
 
 namespace desktop.ViewModels;
@@ -21,5 +23,18 @@ public class ViewModelViewSelector : DataTemplateSelector
         }
 
         return base.SelectTemplate(item, container);
+    }
+}
+
+public class WidthConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (bool)value ? 200 : 40; // 展开时宽度 200，收起时宽度 40
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Windows;
+using System.Windows.Data;
 using desktop.Models;
 using desktop.Services.IServices;
 using desktop.ViewModels;
@@ -70,4 +72,6 @@ public partial class MainWindow : Window
         Process.Start(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "updater.exe"));
         Application.Current.Shutdown();
     }
+
+    
 }

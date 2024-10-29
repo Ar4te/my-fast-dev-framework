@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <viewModels:ViewModelViewSelector x:Key="ViewModelViewSelector"/>
+            <viewModels:WidthConverter x:Key="WidthConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
