@@ -1,105 +1,10 @@
-﻿<!--<Window x:Class="desktop.Views.MainWindow"
+﻿<Window x:Class="desktop.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:views="clr-namespace:desktop.Views"
-        Title="Contact Manager" Height="490" Width="800"
-        ResizeMode="NoResize">
-
-    <Grid Background="White" Margin="5 0 5 0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        -->
-<!-- 顶部导航按钮 -->
-<!--
-        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Button Command="{Binding NavigateToContactListCommand}" Content="Contact List" Margin="5 0 20 0" />
-                <Button Command="{Binding NavigateToAddContactCommand}" Content="Add Contact" Margin="0 0 20 0" />
-            </StackPanel>
-            <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 5 5 0" />
-            <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 0 5 0" />
-        </StackPanel>
-
-        -->
-<!-- 页面内容区域 -->
-<!--
-        <ContentControl Background="Black" BorderBrush="Gray" Content="{Binding CurrentViewModel}"
-                        Padding="10" Margin="5" Grid.Row="1"
-                        ContentTemplateSelector="{StaticResource ViewModelViewSelector}" />
-
-        -->
-<!-- 消息通知区域 -->
-<!--
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Hidden"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Top"
-                      Margin="0,10,10,0"
-                      x:Name="GrowlBox"
-                      Background="Transparent"
-                      Grid.RowSpan="3">
-            <StackPanel hc:Growl.Token="GlobalMsg" VerticalAlignment="Top" HorizontalAlignment="Right" />
-        </ScrollViewer>
-
-        -->
-<!-- 底部分割线 -->
-<!--
-        <StackPanel Grid.Row="2" Orientation="Vertical">
-            <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 0 5 0" />
-            <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 0 5 0" />
-
-            -->
-<!-- 底部行，包含底部按钮和闪烁点 -->
-<!--
-            <Grid HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    -->
-<!-- 左侧按钮区 -->
-<!--
-                    <ColumnDefinition Width="*" />
-                    -->
-<!-- 中间版权区 -->
-<!--
-                    <ColumnDefinition Width="Auto" />
-                    -->
-<!-- 右侧闪烁点 -->
-<!--
-                </Grid.ColumnDefinitions>
-
-                -->
-<!-- 底部按钮区域 -->
-<!--
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Button Command="{Binding NavigateToContactListCommand}" Content="Contact List" Margin="5 0 20 0" />
-                    <Button Command="{Binding NavigateToAddContactCommand}" Content="Add Contact" Margin="0 0 20 0" />
-                </StackPanel>
-
-                -->
-<!-- 中间的版权信息 -->
-<!--
-                <TextBlock Grid.Column="1" DockPanel.Dock="Top" Text="© 2024-Forever By Arete" VerticalAlignment="Center" 
-                           HorizontalAlignment="Left" FontSize="12" Foreground="Gray" />
-
-                -->
-<!-- 右下角固定的闪烁点用户控件 -->
-<!--<views:StatusPotsView Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" />-->
-<!--
-                <ContentControl Content="{Binding StatusPotsViewModel}" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" ContentTemplateSelector="{StaticResource ViewModelViewSelector}" />
-            </Grid>
-        </StackPanel>
-    </Grid>
-</Window>-->
-<Window x:Class="desktop.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:views="clr-namespace:desktop.Views"
-        Title="Contact Manager" Height="490" Width="800"
+        xmlns:views="clr-namespace:desktop.Views" 
+        xmlns:viewmodels="clr-namespace:desktop.ViewModels"
+        Title="Contact Manager" Height="500" Width="800"
         ResizeMode="NoResize">
 
     <Grid Background="White" Margin="5 0 5 0">
@@ -118,28 +23,42 @@
         <Expander x:Name="DrawerExpander" ExpandDirection="Right" IsExpanded="False"
                   Width="{Binding IsExpanded, ElementName=DrawerExpander, Converter={StaticResource WidthConverter}}"
                   HorizontalAlignment="Left" Background="#E0E0E0" Padding="0" Margin="0">
-            <StackPanel Background="#E0E0E0" HorizontalAlignment="Left">
-                <Button Command="{Binding NavigateToContactListCommand}" BorderBrush="Transparent" Content="Contact List" Height="40" Width="120" Margin="5 5"/>
-                <Button Command="{Binding NavigateToAddContactCommand}" BorderBrush="Transparent" Content="Add Contact" Height="40" Width="120" Margin="5 0 5 5"/>
-                <!-- 添加其他菜单项 -->
-            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 5" 
+                        BorderBrush="Gray" Width="50" Height="50" BorderThickness="1" CornerRadius="50" >
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Ava
+                        </TextBlock></Border>
+                    <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 0 5 0" />
+                </StackPanel>
+                <hc:ButtonGroup Margin="0 5 0 5" Orientation="Vertical" Grid.Row="1">
+                    <RadioButton Margin="5 0 5 0" Content="Contact List" Command="{Binding NavigateToContactListCommand}" />
+                    <RadioButton Margin="5 5 5 0" Content="Add Contact" Command="{Binding NavigateToAddContactCommand}"/>
+                    <RadioButton Margin="5 5 5 0" IsEnabled="False" Content="RadioButton"/>
+                    <RadioButton Margin="5 5 5 0" Content="RadioButton"/>
+                </hc:ButtonGroup>
+            </Grid>
         </Expander>
 
         <!-- 页面内容区域 -->
-        <ContentControl Background="Black" BorderBrush="Gray" Content="{Binding CurrentViewModel}"
-                        Padding="5" Margin="5" Grid.Column="1" Grid.Row="0"
+        <ContentControl Background="Black" BorderBrush="Gray" BorderThickness="1" Content="{Binding CurrentViewModel}"
+                        Padding="0 5 5 5" Margin="0 0 0 0" Grid.Column="1" Grid.Row="0"
                         ContentTemplateSelector="{StaticResource ViewModelViewSelector}" />
 
         <!-- 消息通知区域 -->
         <ScrollViewer Grid.Column="1" Grid.Row="0" VerticalScrollBarVisibility="Hidden"
                       HorizontalAlignment="Right"
                       VerticalAlignment="Top"
-                      Margin="0,10,10,0"
+                      Margin="0 10 0 0"
                       x:Name="GrowlBox"
                       Background="Transparent">
             <StackPanel hc:Growl.Token="GlobalMsg" VerticalAlignment="Top" HorizontalAlignment="Right" />
         </ScrollViewer>
-
 
         <!-- 底部分割线和底部内容 -->
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Grid.ColumnSpan="2">
@@ -148,16 +67,16 @@
             <!-- 底部行，包含底部按钮和闪烁点 -->
             <Grid HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <!-- 底部按钮区域 -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Button Command="{Binding NavigateToContactListCommand}" Content="Contact List" Margin="5 0 20 0" />
                     <Button Command="{Binding NavigateToAddContactCommand}" Content="Add Contact" Margin="0 0 20 0" />
-                </StackPanel>
+                </StackPanel>-->
 
                 <!-- 中间的版权信息 -->
                 <TextBlock Grid.Column="1" Text="© 2024-Forever By Arete" VerticalAlignment="Center" 
