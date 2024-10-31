@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Windows;
-using System.Windows.Data;
 using desktop.Models;
 using desktop.Services.IServices;
 using desktop.ViewModels;
@@ -34,7 +32,7 @@ public partial class MainWindow : Window
         {
             var serverVersion = await GetServerVersionAsync(); // 从服务器获取版本号
             if (serverVersion != curVersion &&
-           MessageBox.Show("有新版本可用，是否更新？", "更新", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                MessageBox.Show("有新版本可用，是否更新？", "更新", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 // 下载更新
                 await DownloadUpdateAsync();
@@ -63,7 +61,7 @@ public partial class MainWindow : Window
         var serverUrl = App.Configuration.GetValue("DownloadUpdateZipUrl", "http://example.com/update.zip");
         using var client = new HttpClient();
         var response = await client.GetAsync(serverUrl);
-        using var fs = new FileStream("update.zip", FileMode.Create);
+        await using var fs = new FileStream("update.zip", FileMode.Create);
         await response.Content.CopyToAsync(fs);
     }
 
@@ -73,5 +71,20 @@ public partial class MainWindow : Window
         Application.Current.Shutdown();
     }
 
-    
+    private void OpenDialog(object sender, RoutedEventArgs routedEventArgs)
+    {
+        var dialog = App.ServiceProvider.GetRequiredService<CustomDialog>();
+        dialog.DataContext = new CustomDialogViewModel(
+            "Test",
+            closeCommand: () => dialog.Close(),
+            cancelCommand: () => dialog.Close(),
+            confirmCommand: () =>
+            {
+                MessageBox.Show("confirmed!");
+                dialog.Close();
+            });
+
+        dialog.Owner = this;
+        dialog.ShowDialog();
+    }
 }

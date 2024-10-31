@@ -40,7 +40,7 @@
                     <RadioButton Margin="5 0 5 0" Content="Contact List" Command="{Binding NavigateToContactListCommand}" />
                     <RadioButton Margin="5 5 5 0" Content="Add Contact" Command="{Binding NavigateToAddContactCommand}"/>
                     <RadioButton Margin="5 5 5 0" IsEnabled="False" Content="RadioButton"/>
-                    <RadioButton Margin="5 5 5 0" Content="RadioButton"/>
+                    <RadioButton Margin="5 5 5 0" Content="RadioButton" Click="OpenDialog"/>
                 </hc:ButtonGroup>
             </Grid>
         </Expander>

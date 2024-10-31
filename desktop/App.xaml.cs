@@ -32,12 +32,14 @@ public partial class App : Application
             .Build();
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.File("logs\\app.log", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 30, retainedFileTimeLimit: TimeSpan.FromDays(10))
+            .WriteTo.File("logs\\app.log", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 30,
+                retainedFileTimeLimit: TimeSpan.FromDays(10))
             .CreateLogger();
         var services = new ServiceCollection();
         ConfigureServices(services);
         ServiceProvider = services.BuildServiceProvider();
-        ServiceProvider.InitialDb(Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(BaseEntity))).ToArray());
+        ServiceProvider.InitialDb(Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => t.IsSubclassOf(typeof(BaseEntity))).ToArray());
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -54,6 +56,7 @@ public partial class App : Application
         services.AddTransient<ContactListViewModel>();
         services.AddTransient<AddContactViewModel>();
         services.AddTransient<StatusPotsViewModel>();
+        services.AddTransient<CustomDialog>();
         services.AddTransient<ContactListView>();
         services.AddTransient<AddContactView>();
         services.AddTransient<StatusPotsView>();
