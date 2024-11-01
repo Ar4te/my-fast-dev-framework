@@ -30,7 +30,6 @@
                 <button @click="executeScriptCode" id="executeScriptCode"
                     :disabled="scriptCode == '' || scriptCode.length <= 0" style="margin: 50px;">Execute Script
                     Code</button>
-
                 <button @click="saveFlow">Save Rule</button>
             </div>
         </div>

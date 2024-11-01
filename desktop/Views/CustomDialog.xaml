@@ -4,25 +4,97 @@
         Title="{Binding Title}" Width="400" Height="250"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent" Opacity="0">
-    <Border Background="White" CornerRadius="8" Padding="10" BorderBrush="Gray" BorderThickness="1">
-        <Grid>
-            <!-- <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold" -->
-            <!--            HorizontalAlignment="Center" VerticalAlignment="Center" /> -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button Content="X" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        x:Name="CloseBtn" Command="{Binding CloseCommand}" Width="30" Height="30" 
-                        MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave"
-                        Background="Transparent" Foreground="Gray" BorderBrush="Transparent" />
-            </StackPanel>
 
-            <ContentControl Content="{Binding Content}" Margin="10,40,10,50" />
+	<Window.Resources>
+		<Style x:Key="CustomDialogBtnStyle" TargetType="Button">
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
-                <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="5" Width="80" />
-                <Button Content="OK" Command="{Binding ConfirmCommand}" Margin="5" Width="80" />
-            </StackPanel>
-        </Grid>
-    </Border>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<StackPanel>
+							<!-- 主按钮部分 -->
+							<Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Width="{TemplateBinding Width}"
+                                    Height="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Height,
+                                    Converter={StaticResource CustomHeightConverter}}"
+                                    CornerRadius="8">
+								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
+							<!-- 下划线部分 -->
+							<Border Width="{TemplateBinding Width}"
+                                    Height="1"
+									Background="Gray"
+									BorderBrush="Transparent"
+									BorderThickness="0"
+                                    x:Name="UnderlineBorder" >
+								<Border.Effect>
+									<DropShadowEffect Color="Black" Opacity="0.5" BlurRadius="4" Direction="270" ShadowDepth="0" />
+								</Border.Effect>
+							</Border>
+						</StackPanel>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="BorderBrush" Value="Gray" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style x:Key="CloseBtnStyle" TargetType="Button" BasedOn="{StaticResource CustomDialogBtnStyle}">
+			<Setter Property="Width" Value="30" />
+			<Setter Property="Height" Value="30" />
+			<Setter Property="Foreground" Value="Gray" />
+		</Style>
+		<Style x:Key="CancelConfirmBtnStyle" TargetType="Button" BasedOn="{StaticResource CustomDialogBtnStyle}">
+			<Setter Property="Width" Value="80" />
+			<Setter Property="Height" Value="30" />
+			<Setter Property="Foreground" Value="Gray" />
+			<Setter Property="Margin" Value="5" />
+		</Style>
+		<Style x:Key="CancelBtnStyle" TargetType="Button" BasedOn="{StaticResource CancelConfirmBtnStyle}">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="OrangeRed" />
+					<Setter Property="Foreground" Value="Black" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style x:Key="ConfirmBtnStyle" TargetType="Button" BasedOn="{StaticResource CancelConfirmBtnStyle}">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="DodgerBlue" />
+					<Setter Property="Foreground" Value="Black" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+
+	<Border Background="White" CornerRadius="8" Padding="10" BorderBrush="Gray" BorderThickness="1">
+		<Grid>
+			<!-- <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold" -->
+			<!--            HorizontalAlignment="Center" VerticalAlignment="Center" /> 
+                        MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave"-->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+				<Button Content="X" x:Name="CloseBtn" Command="{Binding CloseCommand}"
+                        Style="{StaticResource CloseBtnStyle}" />
+			</StackPanel>
+
+			<ContentControl Content="{Binding Content}" Margin="10,40,10,50" />
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+				<Button Content="Cancel" Style="{StaticResource CancelBtnStyle}"
+                        Command="{Binding CancelCommand}" />
+				<Button Content="OK" Style="{StaticResource ConfirmBtnStyle}" Command="{Binding ConfirmCommand}" />
+			</StackPanel>
+		</Grid>
+	</Border>
 
 
 </Window>

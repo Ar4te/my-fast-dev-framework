@@ -1,9 +1,8 @@
 ﻿<Application x:Class="desktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:desktop"
              xmlns:viewModels="clr-namespace:desktop.ViewModels"
-             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:customConverts="clr-namespace:desktop.ViewModels.Converters"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary >
@@ -12,7 +11,8 @@
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <viewModels:ViewModelViewSelector x:Key="ViewModelViewSelector"/>
-            <viewModels:WidthConverter x:Key="WidthConverter"/>
+            <customConverts:WidthConverter x:Key="WidthConverter"/>
+            <customConverts:CustomHeightConverter x:Key="CustomHeightConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

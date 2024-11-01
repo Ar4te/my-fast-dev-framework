@@ -11,14 +11,14 @@ public partial class CustomDialog : Window
     public CustomDialog()
     {
         InitializeComponent();
-        
+
         WindowStyle = WindowStyle.None;
         AllowsTransparency = true;
         ShowInTaskbar = false;
         Topmost = true;
         Owner = null;
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        
+
         Loaded += (s, e) => FadeIn();
         MouseDown += CustomDialog_MouseDown;
     }
@@ -37,25 +37,15 @@ public partial class CustomDialog : Window
         BeginAnimation(OpacityProperty, fadeInAnimation);
     }
 
-    private bool isFirstClose = true;
+    private bool _isFirstClose = true;
 
-    protected override async void OnClosing(CancelEventArgs e)
+    protected override void OnClosing(CancelEventArgs e)
     {
-        e.Cancel = isFirstClose;
-        isFirstClose = false;
+        e.Cancel = _isFirstClose;
+        _isFirstClose = false;
         var fadeOutAnimation = new DoubleAnimation(1, 0, TimeSpan.FromSeconds((0.3)));
         fadeOutAnimation.Completed += (s, _) => Close();
 
         BeginAnimation(OpacityProperty, fadeOutAnimation);
-    }
-
-    private void CloseBtnMouseEnter(object sender, MouseEventArgs e)
-    {
-        CloseBtn.BorderBrush = Brushes.Gray;
-    }
-
-    private void CloseBtnMouseLeave(object sender, MouseEventArgs e)
-    {
-        CloseBtn.BorderBrush = Brushes.Transparent;
     }
 }
