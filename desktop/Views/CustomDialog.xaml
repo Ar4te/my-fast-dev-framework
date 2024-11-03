@@ -241,7 +241,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- 标题 -->
-                <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
                 <!-- 最小化按钮 -->
                 <Button Grid.Column="1" Content="-" Style="{StaticResource MinMaxBtnStyle}" Click="MinimizeWindow_Click" />
