@@ -13,6 +13,9 @@
             <viewModels:ViewModelViewSelector x:Key="ViewModelViewSelector"/>
             <customConverts:WidthConverter x:Key="WidthConverter"/>
             <customConverts:CustomHeightConverter x:Key="CustomHeightConverter" />
+            <customConverts:LengthToVisibilityConverter x:Key="LengthToVisibilityConverter" />
+            <customConverts:CustomWindowStateToIconConverter x:Key="CustomWindowStateToIconConverter" />
+            <customConverts:CustomWindowStateToToggleCommandConverter x:Key="CustomWindowStateToToggleCommandConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

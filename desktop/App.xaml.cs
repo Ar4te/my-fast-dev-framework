@@ -56,10 +56,13 @@ public partial class App : Application
         services.AddTransient<ContactListViewModel>();
         services.AddTransient<AddContactViewModel>();
         services.AddTransient<StatusPotsViewModel>();
+        services.AddTransient<LoginViewModel>();
         services.AddTransient<CustomDialog>();
         services.AddTransient<ContactListView>();
         services.AddTransient<AddContactView>();
         services.AddTransient<StatusPotsView>();
+        services.AddTransient<LoginView>();
+        services.AddTransient<RoundedButton>();
 
         services.AddSingleton<MainWindow>();
     }

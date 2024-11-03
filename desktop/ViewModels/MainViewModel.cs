@@ -9,6 +9,7 @@ public class MainViewModel : BaseViewModel
     public RelayCommand NavigateToContactListCommand { get; }
     public RelayCommand NavigateToAddContactCommand { get; }
     public RelayCommand NavigateToStatusPotsCommand { get; }
+    public RelayCommand NavigateToLoginCommand { get; }
 
     public StatusPotsViewModel StatusPotsViewModel
     {
@@ -35,6 +36,8 @@ public class MainViewModel : BaseViewModel
         NavigateToContactListCommand = new RelayCommand(navigationService.NavigateTo<ContactListViewModel>);
         NavigateToAddContactCommand = new RelayCommand(navigationService.NavigateTo<AddContactViewModel>);
         NavigateToStatusPotsCommand = new RelayCommand(navigationService.NavigateTo<StatusPotsViewModel>);
+        NavigateToLoginCommand = new RelayCommand(navigationService.NavigateTo<LoginViewModel>);
+
 
         navigationService.OnViewModelChanged += viewModel => CurrentViewModel = viewModel;
         navigationService.NavigateTo<ContactListViewModel>();

@@ -11,7 +11,6 @@ public partial class CustomDialog : Window
     public CustomDialog()
     {
         InitializeComponent();
-
         WindowStyle = WindowStyle.None;
         AllowsTransparency = true;
         ShowInTaskbar = false;
@@ -21,6 +20,15 @@ public partial class CustomDialog : Window
 
         Loaded += (s, e) => FadeIn();
         MouseDown += CustomDialog_MouseDown;
+    }
+
+    public static readonly DependencyProperty DialogContentProperty =
+        DependencyProperty.Register("DialogContent", typeof(object), typeof(CustomDialog), new PropertyMetadata(null));
+
+    public object DialogContent
+    {
+        get => (object)GetValue(DialogContentProperty);
+        set => SetValue(DialogContentProperty, value);
     }
 
     private void CustomDialog_MouseDown(object sender, MouseButtonEventArgs e)
@@ -47,5 +55,17 @@ public partial class CustomDialog : Window
         fadeOutAnimation.Completed += (s, _) => Close();
 
         BeginAnimation(OpacityProperty, fadeOutAnimation);
+    }
+
+    private void MinimizeWindow_Click(object sender, RoutedEventArgs e)
+    {
+        // 将窗口最小化
+        this.WindowState = WindowState.Minimized;
+    }
+
+    private void ToggleWindowState_Click(object sender, RoutedEventArgs e)
+    {
+        // 切换窗口状态
+        this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
     }
 }

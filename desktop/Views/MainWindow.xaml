@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:views="clr-namespace:desktop.Views"
-        xmlns:viewmodels="clr-namespace:desktop.ViewModels"
-        Title="Contact Manager" Height="500" Width="800"
-        ResizeMode="NoResize">
+        Title="Contact Manager"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        WindowState="Maximized"
+        Background="White">
 
-    <Grid Background="White" Margin="5 0 5 0">
+    <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" x:Name="DrawerColumn" />
             <!-- 左侧抽屉列 -->
@@ -28,13 +30,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
                 <StackPanel>
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 20 0 5"
-                            BorderBrush="Gray" Width="50" Height="50" BorderThickness="1" CornerRadius="50">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-                            Ava
-                        </TextBlock>
-                    </Border>
+                    <views:RoundedButton Margin="0 30" BorderBrush="Transparent" BorderThickness="0"
+                                         Width="50" Height="50" Command="{Binding NavigateToLoginCommand}"
+                                         BackgroundImage="pack://application:,,,/desktop;Component/Resources/Assets/Avatar.png" />
+
                     <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}"
                                 Margin="5 0 5 0" />
                 </StackPanel>
@@ -55,17 +56,14 @@
 
         <!-- 消息通知区域 -->
         <ScrollViewer Grid.Column="1" Grid.Row="0" VerticalScrollBarVisibility="Hidden"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Top"
-                      Margin="0 10 0 0"
-                      x:Name="GrowlBox"
-                      Background="Transparent">
+                      HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 0 0"
+                      x:Name="GrowlBox" Background="Transparent">
             <StackPanel hc:Growl.Token="GlobalMsg" VerticalAlignment="Top" HorizontalAlignment="Right" />
         </ScrollViewer>
 
         <!-- 底部分割线和底部内容 -->
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Grid.ColumnSpan="2">
-            <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 0 5 0" />
+            <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 5 5 0" />
             <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkOpacityBrush}" Margin="5 0 5 0" />
             <!-- 底部行，包含底部按钮和闪烁点 -->
             <Grid HorizontalAlignment="Stretch">
@@ -74,12 +72,6 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-
-                <!-- 底部按钮区域 -->
-                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Button Command="{Binding NavigateToContactListCommand}" Content="Contact List" Margin="5 0 20 0" />
-                    <Button Command="{Binding NavigateToAddContactCommand}" Content="Add Contact" Margin="0 0 20 0" />
-                </StackPanel>-->
 
                 <!-- 中间的版权信息 -->
                 <TextBlock Grid.Column="1" Text="© 2024-Forever By Arete" VerticalAlignment="Center"

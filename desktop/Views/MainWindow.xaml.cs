@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Windows;
+using System.Windows.Controls;
 using desktop.Models;
 using desktop.Services.IServices;
 using desktop.ViewModels;
@@ -83,7 +84,14 @@ public partial class MainWindow : Window
                 MessageBox.Show("confirmed!");
                 dialog.Close();
             });
-
+        dialog.DialogContent = new StackPanel
+        {
+            Children =
+            {
+                new TextBlock { Text = "This is a sample content inside the dialog." },
+                new System.Windows.Controls.TextBox { Width = 200, Margin = new Thickness(5) }
+            }
+        };
         dialog.Owner = this;
         dialog.ShowDialog();
     }
