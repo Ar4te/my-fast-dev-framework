@@ -6,6 +6,11 @@ namespace desktop.Behaviors;
 
 public class HighlighterBehavior
 {
+    protected HighlighterBehavior()
+    {
+
+    }
+
     public static readonly DependencyProperty IsHighlightedPropertyProperty =
         DependencyProperty.Register("IsHighlightedProperty", typeof(bool), typeof(HighlighterBehavior), new PropertyMetadata(false, OnIsHighlightedChanged));
 

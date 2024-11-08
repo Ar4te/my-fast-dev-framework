@@ -3,21 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:desktop.ViewModels"
              xmlns:hc="https://handyorg.github.io/handycontrol" Padding="0 5">
-    <DataGrid HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False"
-              VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Contacts}" HorizontalAlignment="Stretch"
-              HorizontalContentAlignment="Center">
-        <DataGrid.RowHeaderTemplate>
-            <DataTemplate>
-                <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
-            </DataTemplate>
-        </DataGrid.RowHeaderTemplate>
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-            <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
-            <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-            <!--//TODO:嵌入一个按钮组到最后一列-->
-            <!-- <DataGridTemplateColumn Header="Operator" > -->
-            <!-- </DataGridTemplateColumn> -->
-        </DataGrid.Columns>
-    </DataGrid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <DataGrid HeadersVisibility="All" 
+                      RowHeaderWidth="60" 
+                      AutoGenerateColumns="False"
+                      VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Disabled"
+                      ItemsSource="{Binding Contacts}" 
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Center"
+                      EnableColumnVirtualization="True"
+                      EnableRowVirtualization="True"
+                      >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle.Small}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle.Small}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+
+                    <DataGridTemplateColumn Header="Operator" Width="*" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button Content="Edit" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                    <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!--TODO:分页按钮-->
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <hc:Divider Margin="0 5 0 5" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Previous" Command="{Binding PreviousPageCommand}" >
+                            <Button.IsEnabled>
+                                <MultiBinding Converter="{StaticResource PageEnabledConverter}" ConverterParameter="Previous">
+                                    <Binding Path="CurrentPage" />
+                                    <Binding Path="TotalPages" />
+                                </MultiBinding>
+                            </Button.IsEnabled>
+                        </Button>
+                        <TextBlock Text="{Binding CurrentPage}" Margin="10,0" />
+                        <TextBlock Text=" / " />
+                        <TextBlock Text="{Binding TotalPages}" Margin="10,0" />
+                        <Button Content="Next" Command="{Binding NextPageCommand}">
+                            <Button.IsEnabled>
+                                <MultiBinding Converter="{StaticResource PageEnabledConverter}" ConverterParameter="Next">
+                                    <Binding Path="CurrentPage" />
+                                    <Binding Path="TotalPages" />
+                                </MultiBinding>
+                            </Button.IsEnabled>
+                        </Button>
+                    </StackPanel>
+
+                    <Button HorizontalAlignment="Right" Content="ExportToCSV" Command="{Binding DataContext.ExportToCSVCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </UserControl>

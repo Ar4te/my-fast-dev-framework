@@ -28,12 +28,15 @@ public class AddContactViewModel : BaseViewModel
         if (row == 1)
         {
             Growl.Success("操作成功", "GlobalMsg");
-            // StatusPotsViewModel.Success();
             _navigationService.NavigateTo<ContactListViewModel>();
         }
         else
         {
             Growl.Error("操作失败", "GlobalMsg");
         }
+
+        //var rows = Enumerable.Range(0, 100).Select(t => new Contact { Name = $"Name {t}", Phone = $"123-456-{t:D4}", Email = $"email{t}@example.com" });
+        //await _contactService.CreateListAndReturnPksAsync<int>(rows.ToList());
+
     }
 }

@@ -16,6 +16,7 @@
             <customConverts:LengthToVisibilityConverter x:Key="LengthToVisibilityConverter" />
             <customConverts:CustomWindowStateToIconConverter x:Key="CustomWindowStateToIconConverter" />
             <customConverts:CustomWindowStateToToggleCommandConverter x:Key="CustomWindowStateToToggleCommandConverter" />
+            <customConverts:PageEnabledConverter x:Key="PageEnabledConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
