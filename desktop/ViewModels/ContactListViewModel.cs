@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
 using desktop.Models;
 using desktop.Services.IServices;
 using desktop.ViewModels.Base;
+using HandyControl.Controls;
 
 namespace desktop.ViewModels;
 
@@ -17,8 +19,11 @@ public class ContactListViewModel : BaseViewModel
         set
         {
             _currentPage = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(CurrentPage));
             UpdateContacts();
+
+            NextPageCommand.RaiseCanExecuteChanged();
+            PreviousPageCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -29,7 +34,7 @@ public class ContactListViewModel : BaseViewModel
         set
         {
             _totalPages = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(TotalPages));
         }
     }
 
@@ -39,9 +44,9 @@ public class ContactListViewModel : BaseViewModel
 
     public RelayCommand<Contact> EditCommand { get; }
     public RelayCommand<Contact> DeleteCommand { get; }
-    public RelayCommand<List<Contact>> ExportToCSVCommand { get; }
-    public RelayCommand<int> NextPageCommand { get; }
-    public RelayCommand<int> PreviousPageCommand { get; }
+    public RelayCommand<object> ExportToCSVCommand { get; }
+    public RelayCommand NextPageCommand { get; }
+    public RelayCommand PreviousPageCommand { get; }
 
     public ContactListViewModel(IContactService contactService)
     {
@@ -49,11 +54,11 @@ public class ContactListViewModel : BaseViewModel
         AllContacts = new ObservableCollection<Contact>();
         Contacts = new ObservableCollection<Contact>();
 
-        NextPageCommand = new RelayCommand<int>(_ => NextPage(), _ => CurrentPage < TotalPages);
-        PreviousPageCommand = new RelayCommand<int>(_ => PreviousPage(), _ => CurrentPage > 1);
+        NextPageCommand = new RelayCommand(NextPage, () => CurrentPage < TotalPages);
+        PreviousPageCommand = new RelayCommand(PreviousPage, () => CurrentPage > 1);
         EditCommand = new RelayCommand<Contact>(EditContact);
         DeleteCommand = new RelayCommand<Contact>(DeleteContact);
-        ExportToCSVCommand = new RelayCommand<List<Contact>>(ExportToCSV);
+        ExportToCSVCommand = new RelayCommand<object>(ExportToCSV);
         _ = LoadContacts();
         UpdateContacts();
     }
@@ -98,9 +103,22 @@ public class ContactListViewModel : BaseViewModel
         }
     }
 
-    private void ExportToCSV(List<Contact> list)
+    private static void ExportToCSV(object list)
     {
-        throw new NotImplementedException();
+        if (list is ObservableCollection<Contact> _contacts && _contacts.Count > 0)
+        {
+            var fileContent = string.Join("\r\n", _contacts.Select(t => $"{t.Id},{t.Name},{t.Email},{t.Phone}"));
+            var directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ExportFiles");
+            if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+            var filePath = Path.Combine(directory, $"{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+            bool isAppend = !File.Exists(filePath);
+            using var writer = new StreamWriter(filePath, true);
+
+            if (isAppend) writer.WriteLine("Id,Name,Email,Phone");
+            writer.Write(fileContent);
+
+            Growl.Success($"当前页面内容已保存到文件{filePath}");
+        }
     }
 
     private void EditContact(Contact contact)

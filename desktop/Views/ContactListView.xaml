@@ -8,8 +8,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid>
-            <DataGrid HeadersVisibility="All" 
+        <DataGrid HeadersVisibility="All" 
                       RowHeaderWidth="60" 
                       AutoGenerateColumns="False"
                       VerticalScrollBarVisibility="Visible"
@@ -20,71 +19,78 @@
                       EnableColumnVirtualization="True"
                       EnableRowVirtualization="True"
                       >
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle.Small}">
-                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle.Small}">
-                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                    </Style>
-                </DataGrid.CellStyle>
-                <DataGrid.RowHeaderTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
-                    </DataTemplate>
-                </DataGrid.RowHeaderTemplate>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle.Small}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle.Small}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
 
-                    <DataGridTemplateColumn Header="Operator" Width="*" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Button Content="Edit" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
-                                    <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                <DataGridTemplateColumn Header="Operator" Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Content="Edit" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
         <!--TODO:分页按钮-->
         <Grid Grid.Row="1">
-            <StackPanel>
-                <hc:Divider Margin="0 5 0 5" />
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="Previous" Command="{Binding PreviousPageCommand}" >
-                            <Button.IsEnabled>
-                                <MultiBinding Converter="{StaticResource PageEnabledConverter}" ConverterParameter="Previous">
-                                    <Binding Path="CurrentPage" />
-                                    <Binding Path="TotalPages" />
-                                </MultiBinding>
-                            </Button.IsEnabled>
-                        </Button>
-                        <TextBlock Text="{Binding CurrentPage}" Margin="10,0" />
-                        <TextBlock Text=" / " />
-                        <TextBlock Text="{Binding TotalPages}" Margin="10,0" />
-                        <Button Content="Next" Command="{Binding NextPageCommand}">
-                            <Button.IsEnabled>
-                                <MultiBinding Converter="{StaticResource PageEnabledConverter}" ConverterParameter="Next">
-                                    <Binding Path="CurrentPage" />
-                                    <Binding Path="TotalPages" />
-                                </MultiBinding>
-                            </Button.IsEnabled>
-                        </Button>
-                    </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"  />
+                    <ColumnDefinition Width="*"  />
+                </Grid.ColumnDefinitions>
 
-                    <Button HorizontalAlignment="Right" Content="ExportToCSV" Command="{Binding DataContext.ExportToCSVCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                <hc:Divider Margin="0 5 0 5" Grid.ColumnSpan="2"/>
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="&lt;" Command="{Binding PreviousPageCommand}" >
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource PageEnabledConverter}" ConverterParameter="Previous">
+                                <Binding Path="CurrentPage" UpdateSourceTrigger="PropertyChanged" />
+                                <Binding Path="TotalPages" UpdateSourceTrigger="PropertyChanged" />
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding CurrentPage}" Margin="10,0" />
+                    <TextBlock VerticalAlignment="Center" Text=" / " />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding TotalPages}" Margin="10,0" />
+                    <Button Content="&gt;" Command="{Binding NextPageCommand}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource PageEnabledConverter}" ConverterParameter="Next">
+                                <Binding Path="CurrentPage" UpdateSourceTrigger="PropertyChanged" />
+                                <Binding Path="TotalPages" UpdateSourceTrigger="PropertyChanged" />
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                    </Button>
                 </StackPanel>
-            </StackPanel>
+                <StackPanel Margin="5 0 0 0" Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button HorizontalAlignment="Right" Content="ExportToCSV" Command="{Binding DataContext.ExportToCSVCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding DataContext.Contacts, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

@@ -10,21 +10,19 @@ public class PageEnabledConverter : IMultiValueConverter
         if (values == null || values.Length != 2)
             return false;
 
-        var currentPage = (int)values[0];
-        var totalPages = (int)values[1];
-
-        if (parameter != null && parameter.ToString() == "Next")
+        if (values[0] is int currentPage && values[1] is int totalPages)
         {
-            var t = currentPage < totalPages;
-            return t;
-        }
-        else if (parameter != null && parameter.ToString() == "Previous")
-        {
-            var t = currentPage > 1;
-            return t;
+            if (parameter != null && parameter.ToString() == "Next")
+            {
+                return currentPage < totalPages;
+            }
+            else if (parameter != null && parameter.ToString() == "Previous")
+            {
+                return currentPage > 1;
+            }
         }
 
-        return false;
+        return true;
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
