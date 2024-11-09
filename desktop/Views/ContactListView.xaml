@@ -53,7 +53,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--TODO:分页按钮-->
         <Grid Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -65,7 +64,7 @@
                     <ColumnDefinition Width="*"  />
                 </Grid.ColumnDefinitions>
 
-                <hc:Divider Margin="0 5 0 5" Grid.ColumnSpan="2"/>
+                <Border Height="2" Margin="0 3" Background="LightGray" BorderBrush="LightGray" BorderThickness="1" Grid.ColumnSpan="2"/>
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button Content="&lt;" Command="{Binding PreviousPageCommand}" >
                         <Button.IsEnabled>
@@ -75,6 +74,8 @@
                             </MultiBinding>
                         </Button.IsEnabled>
                     </Button>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding PageSize}" Margin="10 10 0 10" />
+                    <TextBlock VerticalAlignment="Center" Text="行/页" Margin="0 10 10 10" />
                     <TextBlock VerticalAlignment="Center" Text="{Binding CurrentPage}" Margin="10,0" />
                     <TextBlock VerticalAlignment="Center" Text=" / " />
                     <TextBlock VerticalAlignment="Center" Text="{Binding TotalPages}" Margin="10,0" />

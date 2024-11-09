@@ -10,9 +10,19 @@ namespace desktop.ViewModels;
 public class ContactListViewModel : BaseViewModel
 {
     private readonly IContactService _contactService;
-    private int _currentPage = 1;
-    private readonly int _pageSize = 10;
 
+    private int _pageSize = 10;
+    public int PageSize
+    {
+        get => _pageSize;
+        set
+        {
+            _pageSize = value;
+            OnPropertyChanged(nameof(PageSize));
+        }
+    }
+
+    private int _currentPage = 1;
     public int CurrentPage
     {
         get => _currentPage;
