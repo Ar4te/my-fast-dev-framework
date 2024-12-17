@@ -8,10 +8,10 @@ public class ObjectPool<T> : IDisposable where T : class
     private readonly SemaphoreSlim _semaphoreSlim;
     private readonly Func<T> _objectFactory;
     private readonly Action<T> _onReturn;
-    private readonly int _maxPoolSize;
-    private int _currentPoolSize;
     private readonly object _expandLocker;
     private readonly int _expandCount;
+    private readonly int _maxPoolSize;
+    private int _currentPoolSize;
     private bool _disposed;
 
     public ObjectPool(Func<T> objectFactory, int initialSize, int maxPoolSize, int expandCount = 10, Action<T>? onReturn = null)
@@ -93,7 +93,8 @@ public class ObjectPool<T> : IDisposable where T : class
         var obj = await RentAsync(cancellationToken);
         try
         {
-            return await operation(obj);
+            var result = await operation(obj);
+            return result;
         }
         catch (Exception)
         {
