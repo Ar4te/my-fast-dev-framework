@@ -39,17 +39,23 @@
 
                 <TextBlock Text="Username:" Style="{StaticResource LoginTextBlockStyle}"/>
                 <Grid Grid.Column="1">
-                    <TextBox Name="UsernameTextBox" Style="{StaticResource LoginTextBoxStyle}" />
-                    <TextBlock Text="Enter your username"
+                    <TextBox x:Name="UsernameTextBox" Style="{StaticResource LoginTextBoxStyle}" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBlock IsHitTestVisible="False"
+                               IsEnabled="False"
+                               Focusable="False"
+                               Text="Enter your username"
                                Style="{StaticResource LoginWaterMarkStyle}"
                                Visibility="{Binding ElementName=UsernameTextBox,Path=Text.Length,
                                Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=0}" />
                 </Grid>
 
                 <TextBlock Grid.Row="1" Text="Password:" Style="{StaticResource LoginTextBlockStyle}"/>
-                <Grid  Grid.Row="1" Grid.Column="1" >
-                    <TextBox Name="PasswordTextBox" Style="{StaticResource LoginTextBoxStyle}" />
-                    <TextBlock Text="Enter your username"
+                <Grid Grid.Row="1" Grid.Column="1" >
+                    <TextBox x:Name="PasswordTextBox" Style="{StaticResource LoginTextBoxStyle}" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBlock IsHitTestVisible="False"
+                               IsEnabled="False"
+                               Focusable="False"
+                               Text="Enter your password"
                                Style="{StaticResource LoginWaterMarkStyle}"
                                Visibility="{Binding ElementName=PasswordTextBox,Path=Text.Length,
                                Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=0}" />
