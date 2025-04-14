@@ -1,8 +1,6 @@
 using System.Reflection;
 using Application.IService;
-using Application.IService.RuleEngine;
 using Application.Service;
-using Application.Service.RuleEngine;
 using Domain.Entity.Base;
 using Domain.IRepository;
 using Infrastructure;
@@ -19,9 +17,6 @@ builder.Services.AddTransient<IUnitOfWorkManager, UnitOfWorkManager>();
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IRuleService, RuleService>();
-builder.Services.AddTransient<IRuleFlowService, RuleFlowService>();
-builder.Services.AddTransient<IRuleFlowNodeService, RuleFlowNodeService>();
 
 builder.Services.AddControllers().AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

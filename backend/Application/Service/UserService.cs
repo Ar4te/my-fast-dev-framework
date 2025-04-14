@@ -1,6 +1,7 @@
 ﻿using Application.IService;
 using Common.Extension;
 using Domain.Entity;
+using Domain.Entity.RBAC;
 using Domain.IRepository;
 
 namespace Application.Service;

@@ -2,7 +2,7 @@
 using Domain.Entity.Base;
 using SqlSugar;
 
-namespace Domain.Entity;
+namespace Domain.Entity.RBAC;
 
 [SugarTable("User")]
 [DatabaseConfigId("RBAC")]

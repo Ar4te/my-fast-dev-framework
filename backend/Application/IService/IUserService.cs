@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using Domain.Entity.RBAC;
 
 namespace Application.IService;
 

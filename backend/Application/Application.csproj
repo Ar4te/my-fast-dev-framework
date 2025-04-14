@@ -15,4 +15,9 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\" />
+    <Folder Include="Extension\" />
+  </ItemGroup>
+
 </Project>
