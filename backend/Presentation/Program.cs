@@ -1,6 +1,7 @@
 using System.Reflection;
 using Application.IService;
 using Application.Service;
+using Common.Extension;
 using Domain.Entity.Base;
 using Domain.IRepository;
 using Infrastructure;
@@ -21,7 +22,8 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddControllers().AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddJwtHelper(builder.Configuration);
+builder.Services.AddSwaggerGenSetup();
 builder.Services.AddCors(policy => policy.AddDefaultPolicy(t => t.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 var app = builder.Build();
 app.UseCors(t => t.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
@@ -31,6 +33,7 @@ app.Services.InitialDb(Assembly.GetAssembly(typeof(BaseEntity))!.GetTypes().Wher
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
