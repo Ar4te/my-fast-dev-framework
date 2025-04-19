@@ -26,13 +26,14 @@ public class UserController : ControllerBase
     [HttpGet(Name = "GetUsers")]
     public async Task<IActionResult> GetUsers()
     {
+        var t = User;
         return Ok(await _userService.GetListAsync());
     }
 
-    [HttpGet(Name = "TestJWT")]
-    public async Task<IActionResult> Login(string name, string password)
+    [HttpGet(Name = "Login")]
+    public async Task<string> Login(string name, string password)
     {
-        //return await _userService.Login()
-        return BadRequest();
+        var t = User;
+        return await _userService.Login(name,password);
     }
 }
